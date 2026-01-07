@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sky Background -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#87CEEB"
+                android:endColor="#E0F7FA"
+                android:angle="270" />
+        </shape>
+    </item>
+    
+    <!-- Sun -->
+    <item
+        android:top="24dp"
+        android:right="24dp"
+        android:width="64dp"
+        android:height="64dp"
+        android:gravity="top|right">
+        <shape android:shape="oval">
+            <solid android:color="#FFEB3B" />
+        </shape>
+    </item>
+
+    <!-- Grass/Hills -->
+    <item
+        android:top="400dp"
+        android:bottom="-200dp"
+        android:left="-100dp"
+        android:right="-100dp">
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+        </shape>
+    </item>
+</layer-list>

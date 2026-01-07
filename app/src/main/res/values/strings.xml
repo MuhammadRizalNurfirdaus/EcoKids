@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">EcoKids</string>
+    <string name="title_home">Home EcoKids</string>
+    <string name="menu_animals">🐶 Materi Hewan</string>
+    <string name="menu_fruits">🍎 Materi Buah</string>
+    <string name="menu_quiz">🎮 Quiz</string>
+    <string name="menu_settings">⚙️ Pengaturan</string>
+    <string name="title_animals">Dunia Hewan</string>
+    <string name="title_fruits">Buah-buahan</string>
+    <string name="title_quiz">Kuis Pintar</string>
+    <string name="title_settings">Pengaturan</string>
+    <string name="setting_sound">Suara Musik</string>
+    <string name="correct_answer">Benar! 🎉</string>
+    <string name="wrong_answer">Yah, salah. Coba lagi!</string>
+    <string name="score_text">Nilai Kamu: %1$d</string>
+    
+    <!-- Edit & Delete Strings -->
+    <string name="btn_edit">Ubah 🖌️</string>
+    <string name="btn_delete">Hapus 🗑️</string>
+    <string name="dialog_edit_title">Ubah Data 📝</string>
+    <string name="dialog_delete_title">Yakin Hapus? 🤔</string>
+    <string name="dialog_delete_message">Kamu yakin ingin menghapus ini?</string>
+    <string name="btn_save">Simpan ✓</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="btn_yes_delete">Ya, Hapus</string>
+    <string name="btn_no">Tidak</string>
+    <string name="toast_saved">Berhasil disimpan! 🎉</string>
+    <string name="toast_deleted">Berhasil dihapus! 👋</string>
+    <string name="hint_name">Nama</string>
+    <string name="hint_habitat">Habitat</string>
+    <string name="hint_color">Warna</string>
+    <string name="hint_description">Deskripsi</string>
+    
+    <!-- Parent/Teacher Mode -->
+    <string name="setting_parent_mode">👨‍🏫 Mode Guru/Orang Tua</string>
+    <string name="parent_mode_desc">Masuk untuk mengedit materi pembelajaran</string>
+    <string name="parent_mode_active">✅ Mode Guru Aktif</string>
+    <string name="parent_mode_inactive">🔒 Terkunci</string>
+    <string name="btn_login_parent">Masuk</string>
+    <string name="btn_logout_parent">Keluar</string>
+    <string name="dialog_pin_title">Masukkan PIN 🔐</string>
+    <string name="dialog_pin_hint">PIN (4 digit)</string>
+    <string name="pin_wrong">PIN salah! Coba lagi 🙁</string>
+    <string name="pin_success">Selamat datang, Guru! 👨‍🏫</string>
+    <string name="logout_success">Mode Guru dinonaktifkan</string>
+    <string name="default_pin">1234</string>
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@drawable/bg_nature"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/logoecokids"
+        android:contentDescription="@string/app_name" />
+
+    <Button
+        android:id="@+id/btnAnimals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_animals"
+        android:textSize="20sp"
+        android:background="@drawable/bg_button"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"/>
+
+    <Button
+        android:id="@+id/btnFruits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_fruits"
+        android:textSize="20sp"
+        android:background="@drawable/bg_button"
+        android:backgroundTint="@color/kid_orange"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"/>
+
+    <Button
+        android:id="@+id/btnQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_quiz"
+        android:textSize="20sp"
+        android:background="@drawable/bg_button"
+        android:backgroundTint="@color/kid_blue"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"/>
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_settings"
+        android:textSize="20sp"
+        android:background="@drawable/bg_button"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"/>
+
+</LinearLayout>

@@ -1,0 +1,47 @@
+# Android Studio / Gradle
+*.iml
+.gradle/
+/build/
+/app/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# Local configuration
+local.properties
+*.properties
+
+# IDE - Android Studio / IntelliJ
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/misc.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/runConfigurations.xml
+/.idea/.name
+/.idea/vcs.xml
+
+# Mac
+.DS_Store
+
+# Kotlin
+.kotlin/
+
+# APK files
+*.apk
+*.aab
+
+# Debug files
+*.hprof
+
+# Generated files
+/app/release/
+/app/debug/
+
+# Signing configs (IMPORTANT - never commit these!)
+*.jks
+*.keystore
+signing.properties
