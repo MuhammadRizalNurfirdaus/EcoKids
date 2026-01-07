@@ -2,20 +2,40 @@
 
 Aplikasi edukasi Android untuk anak-anak belajar mengenal **hewan** dan **buah-buahan** dengan cara yang menyenangkan!
 
-![Platform](https://img.shields.io/badge/Platform-Android-green)
-![Language](https://img.shields.io/badge/Language-Kotlin-purple)
-![Database](https://img.shields.io/badge/Database-SQLite-blue)
+---
+
+## 👤 Identitas Mahasiswa
+
+| Keterangan | Detail |
+|------------|--------|
+| **Nama** | Muhammad Rizal Nurfirdaus |
+| **NIM** | 20230810088 |
+| **Kelas** | TINFC-2023-04 |
+| **Mata Kuliah** | Bahasa Pemrograman 3 |
+| **Dosen Pengampu** | Rio Andriyat Krisdiawan, M.Kom |
 
 ---
 
-## 📱 Fitur Utama
+## 📱 Tentang Aplikasi
+
+**EcoKids** adalah aplikasi edukasi berbasis Android yang dirancang khusus untuk anak-anak agar dapat belajar mengenal hewan dan buah-buahan dengan cara yang interaktif dan menyenangkan. Aplikasi ini dilengkapi dengan fitur quiz untuk menguji pemahaman anak serta sistem **Mode Guru/Orang Tua** yang memungkinkan pendidik atau orang tua untuk mengelola materi pembelajaran.
+
+### 🎯 Tujuan Aplikasi
+- Membantu anak-anak belajar mengenal berbagai jenis hewan dan habitat-nya
+- Memperkenalkan berbagai macam buah-buahan beserta manfaatnya
+- Menyediakan quiz interaktif untuk menguji pemahaman anak
+- Memberikan kontrol kepada guru/orang tua untuk mengelola konten pembelajaran
+
+---
+
+## ✨ Fitur Utama
 
 ### 🐶 Materi Hewan
-- Belajar mengenal berbagai hewan (kucing, anjing, sapi, gajah, dll)
+- Belajar mengenal berbagai hewan (kucing, anjing, sapi, gajah, singa, dll)
 - Informasi habitat dan deskripsi yang mudah dipahami anak
 
 ### 🍎 Materi Buah
-- Belajar mengenal berbagai buah (apel, pisang, jeruk, semangka, dll)
+- Belajar mengenal berbagai buah (apel, pisang, jeruk, semangka, mangga, dll)
 - Informasi warna dan manfaat buah untuk kesehatan
 
 ### 🎮 Quiz Interaktif
@@ -61,10 +81,10 @@ Fitur khusus untuk guru dan orang tua agar dapat mengelola materi pembelajaran:
 
 ---
 
-## 📋 Kriteria Penilaian (Fungsionalitas 30%)
+## 📋 Kriteria Penilaian - Fungsionalitas (30%)
 
-| No | Indikator | Status |
-|:--:|-----------|:------:|
+| No | Indikator Penilaian | Status |
+|:--:|---------------------|:------:|
 | B1 | Aplikasi dibuat dengan Kotlin | ✅ |
 | B2 | Minimal 2 Activity digunakan | ✅ (6 Activity) |
 | B3 | Intent Explicit berjalan | ✅ |
@@ -96,7 +116,7 @@ app/src/main/
 │
 └── res/
     ├── layout/                   # XML layouts
-    ├── drawable/                 # Icons, backgrounds
+    ├── drawable/                 # Icons, backgrounds, images
     ├── anim/                     # Animations
     └── values/                   # Colors, strings, themes
 ```
@@ -126,12 +146,14 @@ app/src/main/
 
 ## 📄 License
 
-Project ini dibuat untuk keperluan pembelajaran.
+Project ini dibuat untuk memenuhi tugas **Mata Kuliah Bahasa Pemrograman 3**.
 
 ---
 
 ## 👨‍💻 Developer
 
-**EcoKids Team**
+**Muhammad Rizal Nurfirdaus**  
+NIM: 20230810088  
+TINFC-2023-04
 
 Dibuat dengan ❤️ untuk anak-anak Indonesia 🇮🇩
