@@ -27,3 +27,9 @@ data class QuizQuestion(
     val level: String, // A, B, C, D
     val imageResId: Int = 0
 )
+
+data class User(
+    val id: Int = 0,
+    val username: String,
+    val password: String
+)

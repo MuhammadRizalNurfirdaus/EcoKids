@@ -45,13 +45,13 @@ Aplikasi edukasi Android untuk anak-anak belajar mengenal **hewan** dan **buah-b
 
 ### ⚙️ Pengaturan
 - On/Off musik latar
-- **Mode Guru/Orang Tua** dengan PIN untuk mengelola materi
+- **Mode Guru/Orang Tua** dengan sistem Login & Register
 
 ---
 
-## 🔐 Mode Guru/Orang Tua
+## 🔐 Mode Guru/Orang Tua (Keamanan Tingkat Lanjut)
 
-Fitur khusus untuk guru dan orang tua agar dapat mengelola materi pembelajaran:
+Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-anak tidak dapat mengubah konten pembelajaran secara tidak sengaja.
 
 | Fitur | Mode Anak | Mode Guru |
 |-------|:---------:|:---------:|
@@ -60,11 +60,14 @@ Fitur khusus untuk guru dan orang tua agar dapat mengelola materi pembelajaran:
 | Edit Materi | ❌ | ✅ |
 | Hapus Materi | ❌ | ✅ |
 
-### Cara Mengaktifkan Mode Guru:
+### Alur Aktivasi Mode Guru:
 1. Buka **Pengaturan** ⚙️
-2. Tap tombol **"Masuk"** pada bagian Mode Guru/Orang Tua
-3. Masukkan PIN: **`1234`**
-4. Sekarang tombol Edit/Hapus akan muncul di halaman detail materi
+2. Tap tombol **"Masuk"** pada bagian Mode Guru
+3. **Konfirmasi**: Akan muncul dialog peringatan bahwa fitur ini khusus dewasa
+4. **Login/Register**:
+   - Jika sudah punya akun: Masukkan Username & Password
+   - Jika belum punya akun: Tap "Daftar disini" untuk membuat akun baru
+5. Setelah Login berhasil, tombol Edit/Hapus akan muncul di halaman detail materi
 
 ---
 
@@ -108,17 +111,16 @@ app/src/main/
 │   ├── MateriActivity.kt         # Daftar materi (RecyclerView)
 │   ├── DetailActivity.kt         # Detail materi + Edit/Delete
 │   ├── QuizActivity.kt           # Quiz interaktif
-│   ├── SettingsActivity.kt       # Pengaturan + Mode Guru
-│   ├── DatabaseHelper.kt         # SQLite CRUD operations
+│   ├── SettingsActivity.kt       # Pengaturan + Logic Login/Register
+│   ├── DatabaseHelper.kt         # SQLite CRUD operations (+ User Table)
 │   ├── MateriAdapter.kt          # RecyclerView Adapter
-│   ├── Models.kt                 # Data classes
+│   ├── Models.kt                 # Data classes (Animal, Fruit, Quiz, User)
 │   └── MusicManager.kt           # Background music manager
 │
 └── res/
-    ├── layout/                   # XML layouts
-    ├── drawable/                 # Icons, backgrounds, images
-    ├── anim/                     # Animations
-    └── values/                   # Colors, strings, themes
+    ├── layout/                   # XML layouts (Activities & Dialogs)
+    ├── drawable/                 # Icons, backgrounds
+    └── values/                   # Colors, strings
 ```
 
 ---
@@ -129,18 +131,6 @@ app/src/main/
 2. Buka dengan Android Studio
 3. Sync Gradle
 4. Run pada emulator atau device Android
-
-```bash
-./gradlew assembleDebug
-```
-
----
-
-## 📝 Default Credentials
-
-| Keterangan | Nilai |
-|------------|-------|
-| PIN Mode Guru | `1234` |
 
 ---
 

@@ -9,11 +9,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         const val DATABASE_NAME = "EcoKids.db"
-        const val DATABASE_VERSION = 9
+        const val DATABASE_VERSION = 10
 
         const val TABLE_ANIMALS = "animals"
         const val TABLE_FRUITS = "fruits"
         const val TABLE_QUIZ = "quiz"
+        const val TABLE_USERS = "users"
 
         const val COL_ID = "id"
         const val COL_NAME = "name"
@@ -22,7 +23,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COL_DESC = "description"
         const val COL_IMAGE = "image_res"
         
-
         const val COL_QUESTION = "question"
         const val COL_OPT_A = "option_a"
         const val COL_OPT_B = "option_b"
@@ -30,6 +30,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COL_OPT_D = "option_d"
         const val COL_ANSWER = "correct_answer"
         const val COL_LEVEL = "level"
+        
+        // User columns
+        const val COL_USERNAME = "username"
+        const val COL_PASSWORD = "password"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -62,6 +66,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + COL_IMAGE + " INTEGER" + ")")
         db.execSQL(createQuizTable)
         
+        // Users table for Parent/Teacher login
+        val createUsersTable = ("CREATE TABLE " + TABLE_USERS + "("
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COL_USERNAME + " TEXT UNIQUE,"
+                + COL_PASSWORD + " TEXT" + ")")
+        db.execSQL(createUsersTable)
+        
         insertInitialData(db)
     }
 
@@ -69,6 +80,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ANIMALS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_FRUITS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_QUIZ")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
         onCreate(db)
     }
 
@@ -276,5 +288,37 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val db = this.writableDatabase
         val result = db.delete(TABLE_FRUITS, "$COL_ID = ?", arrayOf(id.toString()))
         return result > 0
+    }
+
+    // ================= USER FUNCTIONS =================
+
+    fun addUser(user: User): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_USERNAME, user.username)
+        values.put(COL_PASSWORD, user.password)
+        return db.insert(TABLE_USERS, null, values)
+    }
+
+    fun checkUser(username: String, password: String): Boolean {
+        val db = this.readableDatabase
+        val columns = arrayOf(COL_ID)
+        val selection = "$COL_USERNAME = ? AND $COL_PASSWORD = ?"
+        val selectionArgs = arrayOf(username, password)
+        val cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null)
+        val count = cursor.count
+        cursor.close()
+        return count > 0
+    }
+
+    fun checkUsernameExists(username: String): Boolean {
+        val db = this.readableDatabase
+        val columns = arrayOf(COL_ID)
+        val selection = "$COL_USERNAME = ?"
+        val selectionArgs = arrayOf(username)
+        val cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null)
+        val count = cursor.count
+        cursor.close()
+        return count > 0
     }
 }

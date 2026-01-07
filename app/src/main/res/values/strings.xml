@@ -44,4 +44,25 @@
     <string name="pin_success">Selamat datang, Guru! 👨‍🏫</string>
     <string name="logout_success">Mode Guru dinonaktifkan</string>
     <string name="default_pin">1234</string>
+    
+    <!-- Login/Register -->
+    <string name="confirm_parent_mode_title">Mode Guru/Orang Tua 👨‍🏫</string>
+    <string name="confirm_parent_mode_message">Fitur ini khusus untuk Guru atau Orang Tua. Anak-anak tidak perlu mengakses fitur ini.\n\nApakah Anda ingin melanjutkan?</string>
+    <string name="btn_continue">Lanjutkan</string>
+    <string name="login_title">Masuk 🔐</string>
+    <string name="register_title">Daftar Akun Baru 📝</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Konfirmasi Password</string>
+    <string name="btn_login">Masuk</string>
+    <string name="btn_register">Daftar</string>
+    <string name="link_register">Belum punya akun? Daftar disini</string>
+    <string name="link_login">Sudah punya akun? Masuk disini</string>
+    <string name="login_success">Selamat datang! 👋</string>
+    <string name="login_failed">Username atau password salah!</string>
+    <string name="register_success">Akun berhasil dibuat! 🎉</string>
+    <string name="register_failed">Gagal membuat akun</string>
+    <string name="password_mismatch">Password tidak cocok!</string>
+    <string name="field_empty">Semua field harus diisi!</string>
+    <string name="username_exists">Username sudah digunakan!</string>
 </resources>
