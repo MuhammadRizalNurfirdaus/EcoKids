@@ -228,6 +228,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             } while (cursor.moveToNext())
         }
         cursor.close()
+        return list
+    }
       // CRUD Operations for Animals
     fun addAnimal(name: String, habitat: String, desc: String, imageResId: Int): Long {
         val db = this.writableDatabase
