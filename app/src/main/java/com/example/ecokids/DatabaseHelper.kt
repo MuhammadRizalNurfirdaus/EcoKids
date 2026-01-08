@@ -303,15 +303,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         // 2. Generate Dynamic Quiz dari Materi (Hanya level A & B)
         // Level A: Tebak Nama Hewan/Buah dari Gambar
         if (level == "A" || level == "B") {
-            val generatedQuizzes = generateDynamicQuizzes()
+            val generatedQuizzes = createDynamicQuizzes()
             quizList.addAll(generatedQuizzes)
         }
 
         return quizList.shuffled().take(10) // Ambil max 10 soal acak
     }
 
-    private fun generateDynamicQuizzes(): List<QuizQuestion> {
+    private fun createDynamicQuizzes(): List<QuizQuestion> {
         val list = ArrayList<QuizQuestion>()
+        // Pastikan methods ini ada
         val animals = getAllAnimals()
         val fruits = getAllFruits()
         
