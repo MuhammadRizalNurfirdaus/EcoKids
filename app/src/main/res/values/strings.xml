@@ -63,4 +63,15 @@
     <string name="password_mismatch">Password tidak cocok!</string>
     <string name="field_empty">Semua field harus diisi!</string>
     <string name="username_exists">Username sudah digunakan!</string>
+    <string name="btn_save">Simpan ✓</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="btn_no">Tidak</string>
+    <string name="dialog_delete_message">Kamu yakin ingin menghapus ini?</string>
+
+    <string-array name="quiz_levels">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
 </resources>
