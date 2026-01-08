@@ -303,37 +303,29 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         // 2. Generate Dynamic Quiz dari Materi (Hanya level A & B)
         // Level A: Tebak Nama Hewan/Buah dari Gambar
         if (level == "A" || level == "B") {
-            val generatedQuizzes = createDynamicQuizzes()
-            quizList.addAll(generatedQuizzes)
+            // INLINED LOGIC createDynamicQuizzes due to weird compiler error
+            val animals = getAllAnimals()
+            val fruits = getAllFruits()
+            
+            // Combine names for distractors
+            val allNames = ArrayList<String>()
+            animals.forEach { allNames.add(it.name) }
+            fruits.forEach { allNames.add(it.name) }
+
+            // Generate Animal Questions
+            for (a in animals) {
+                val q = createGuessNameQuestion(a.name, a.imageResId, allNames)
+                quizList.add(q)
+            }
+
+            // Generate Fruit Questions
+            for (f in fruits) {
+                val q = createGuessNameQuestion(f.name, f.imageResId, allNames)
+                quizList.add(q)
+            }
         }
 
         return quizList.shuffled().take(10) // Ambil max 10 soal acak
-    }
-
-    fun createDynamicQuizzes(): List<QuizQuestion> {
-        val list = ArrayList<QuizQuestion>()
-        // Pastikan methods ini ada
-        val animals = getAllAnimals()
-        val fruits = getAllFruits()
-        
-        // Combine names for distractors
-        val allNames = ArrayList<String>()
-        animals.forEach { allNames.add(it.name) }
-        fruits.forEach { allNames.add(it.name) }
-
-        // Generate Animal Questions
-        for (a in animals) {
-            val q = createGuessNameQuestion(a.name, a.imageResId, allNames)
-            list.add(q)
-        }
-
-        // Generate Fruit Questions
-        for (f in fruits) {
-            val q = createGuessNameQuestion(f.name, f.imageResId, allNames)
-            list.add(q)
-        }
-        
-        return list
     }
 
     fun createGuessNameQuestion(correctName: String, imageRes: Int, allNames: List<String>): QuizQuestion {
