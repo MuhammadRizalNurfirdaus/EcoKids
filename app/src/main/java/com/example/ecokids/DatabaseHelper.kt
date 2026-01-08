@@ -22,7 +22,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COL_COLOR = "color"
         const val COL_DESC = "description"
         const val COL_IMAGE = "image_res"
-        
+
         const val COL_QUESTION = "question"
         const val COL_OPT_A = "option_a"
         const val COL_OPT_B = "option_b"
@@ -30,7 +30,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COL_OPT_D = "option_d"
         const val COL_ANSWER = "correct_answer"
         const val COL_LEVEL = "level"
-        
+
         // User columns
         const val COL_USERNAME = "username"
         const val COL_PASSWORD = "password"
@@ -65,14 +65,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + COL_LEVEL + " TEXT,"
                 + COL_IMAGE + " INTEGER" + ")")
         db.execSQL(createQuizTable)
-        
+
         // Users table for Parent/Teacher login
         val createUsersTable = ("CREATE TABLE " + TABLE_USERS + "("
                 + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_USERNAME + " TEXT UNIQUE,"
                 + COL_PASSWORD + " TEXT" + ")")
         db.execSQL(createUsersTable)
-        
+
         insertInitialData(db)
     }
 
@@ -96,7 +96,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         addAnimal(db, "Kelinci", "Darat", "Kelinci adalah hewan berbulu halus dengan telinga panjang. Kelinci hidup di darat dan sering dipelihara oleh manusia. Kelinci memakan sayuran dan wortel. Kelinci bergerak dengan cara melompat.", R.drawable.img_kelinci)
         addAnimal(db, "Singa", "Hutan", "Singa adalah hewan buas yang hidup di hutan dan padang rumput. Singa memiliki tubuh besar dan gigi yang tajam. Singa disebut sebagai raja hutan. Singa memakan daging.", R.drawable.img_singa)
         addAnimal(db, "Gajah", "Hutan", "Gajah adalah hewan darat terbesar di dunia. Gajah hidup di hutan dan memiliki belalai yang panjang. Belalai digunakan untuk mengambil makanan dan minum. Gajah memakan tumbuhan.", R.drawable.img_gajah)
-        
+
         // Fruits
         addFruit(db, "Apel", "Merah", "Apel adalah buah yang rasanya segar. Apel berwarna merah dan berbentuk bulat. Apel baik untuk kesehatan tubuh. Apel membantu menjaga tubuh tetap sehat.", R.drawable.img_apel)
         addFruit(db, "Pisang", "Kuning", "Pisang adalah buah berwarna kuning. Pisang rasanya manis dan lembut. Pisang memberi energi untuk tubuh. Pisang baik dimakan saat sarapan.", R.drawable.img_pisang)
@@ -273,12 +273,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COL_DESC, desc)
         values.put(COL_IMAGE, imageResId)
         return db.update(TABLE_FRUITS, values, "$COL_ID=?", arrayOf(id.toString()))
-    }    
+    }
     // ================= QUIZ LOGIC (DYNAMIC + MANUAL) =================
 
     fun getQuizzesByLevel(level: String): List<QuizQuestion> {
         val quizList = ArrayList<QuizQuestion>()
-        
+
         // 1. Ambil Manual Quiz dari Database
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $TABLE_QUIZ WHERE $COL_LEVEL = ?", arrayOf(level))
@@ -306,7 +306,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             // INLINED LOGIC createDynamicQuizzes due to weird compiler error
             val animals = getAllAnimals()
             val fruits = getAllFruits()
-            
+
             // Combine names for distractors
             val allNames = ArrayList<String>()
             animals.forEach { allNames.add(it.name) }
@@ -318,10 +318,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val distractors = allNames.filter { it != correctName }.shuffled().take(3)
                 val options = (distractors + correctName).shuffled()
                 val correctIndex = options.indexOf(correctName)
-                
+
                 val q = QuizQuestion(
-                    -1, "Apakah nama gambar ini?", 
-                    options[0], options[1], options[2], options[3], 
+                    -1, "Apakah nama gambar ini?",
+                    options[0], options[1], options[2], options[3],
                     correctIndex, "A", a.imageResId
                 )
                 quizList.add(q)
@@ -333,10 +333,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val distractors = allNames.filter { it != correctName }.shuffled().take(3)
                 val options = (distractors + correctName).shuffled()
                 val correctIndex = options.indexOf(correctName)
-                
+
                 val q = QuizQuestion(
-                    -1, "Apakah nama gambar ini?", 
-                    options[0], options[1], options[2], options[3], 
+                    -1, "Apakah nama gambar ini?",
+                    options[0], options[1], options[2], options[3],
                     correctIndex, "A", f.imageResId
                 )
                 quizList.add(q)
