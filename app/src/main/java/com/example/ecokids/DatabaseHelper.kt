@@ -228,49 +228,52 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             } while (cursor.moveToNext())
         }
         cursor.close()
-        return list
-    }
-
-    fun addAnimal(name: String, habitat: String, desc: String): Long {
+      // CRUD Operations for Animals
+    fun addAnimal(name: String, habitat: String, desc: String, imageResId: Int): Long {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAME, name)
         values.put(COL_HABITAT, habitat)
         values.put(COL_DESC, desc)
-        values.put(COL_IMAGE, R.drawable.logoecokids) // Default image for user added items
+        values.put(COL_IMAGE, imageResId)
         return db.insert(TABLE_ANIMALS, null, values)
     }
 
-    fun addFruit(name: String, color: String, desc: String): Long {
-        val db = this.writableDatabase
-        val values = ContentValues()
-        values.put(COL_NAME, name)
-        values.put(COL_COLOR, color)
-        values.put(COL_DESC, desc)
-        values.put(COL_IMAGE, R.drawable.logoecokids)
-        return db.insert(TABLE_FRUITS, null, values)
-    }
-
-    fun updateAnimal(id: Int, name: String, habitat: String, desc: String): Boolean {
+    fun updateAnimal(id: Int, name: String, habitat: String, desc: String, imageResId: Int): Int {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAME, name)
         values.put(COL_HABITAT, habitat)
         values.put(COL_DESC, desc)
-        val result = db.update(TABLE_ANIMALS, values, "$COL_ID = ?", arrayOf(id.toString()))
-        return result > 0
+        values.put(COL_IMAGE, imageResId)
+        return db.update(TABLE_ANIMALS, values, "$COL_ID=?", arrayOf(id.toString()))
     }
 
-    fun updateFruit(id: Int, name: String, color: String, desc: String): Boolean {
+    fun deleteAnimal(id: Int): Int {
+        val db = this.writableDatabase
+        return db.delete(TABLE_ANIMALS, "$COL_ID=?", arrayOf(id.toString()))
+    }
+
+    // CRUD Operations for Fruits
+    fun addFruit(name: String, color: String, desc: String, imageResId: Int): Long {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAME, name)
         values.put(COL_COLOR, color)
         values.put(COL_DESC, desc)
-        val result = db.update(TABLE_FRUITS, values, "$COL_ID = ?", arrayOf(id.toString()))
-        return result > 0
+        values.put(COL_IMAGE, imageResId)
+        return db.insert(TABLE_FRUITS, null, values)
     }
 
+    fun updateFruit(id: Int, name: String, color: String, desc: String, imageResId: Int): Int {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_NAME, name)
+        values.put(COL_COLOR, color)
+        values.put(COL_DESC, desc)
+        values.put(COL_IMAGE, imageResId)
+        return db.update(TABLE_FRUITS, values, "$COL_ID=?", arrayOf(id.toString()))
+    }    
     // ================= QUIZ LOGIC (DYNAMIC + MANUAL) =================
 
     fun getQuizzesByLevel(level: String): List<QuizQuestion> {

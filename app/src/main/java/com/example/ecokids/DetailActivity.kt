@@ -81,6 +81,40 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private val availableImages = listOf(
+        R.drawable.img_kucing, R.drawable.img_anjing, R.drawable.img_sapi, R.drawable.img_kambing,
+        R.drawable.img_ayam, R.drawable.img_ikan, R.drawable.img_burung, R.drawable.img_kelinci,
+        R.drawable.img_singa, R.drawable.img_gajah,
+        R.drawable.img_apel, R.drawable.img_pisang, R.drawable.img_jeruk, R.drawable.img_mangga,
+        R.drawable.img_anggur, R.drawable.img_stroberi, R.drawable.img_semangka, R.drawable.img_nanas,
+        R.drawable.img_pepaya, R.drawable.img_alpukat,
+        R.drawable.logoecokids
+    )
+
+    private fun showImagePickerDialog(currentImage: Int, onSelected: (Int) -> Unit) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_image_picker)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        
+        dialog.window?.setLayout(
+             (resources.displayMetrics.widthPixels * 0.9).toInt(),
+             android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val rv = dialog.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvImagePicker)
+        rv.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 3)
+        rv.adapter = ImagePickerAdapter(this, availableImages) { selectedResId ->
+            onSelected(selectedResId)
+            dialog.dismiss()
+        }
+        
+        dialog.findViewById<android.view.View>(R.id.btnCancelPicker).setOnClickListener {
+            dialog.dismiss()
+        }
+        
+        dialog.show()
+    }
+
     private fun showEditDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_edit_item, null)
         
@@ -88,6 +122,20 @@ class DetailActivity : AppCompatActivity() {
         val etSubtitle = dialogView.findViewById<EditText>(R.id.etSubtitle)
         val etDescription = dialogView.findViewById<EditText>(R.id.etDescription)
         val tvSubtitleLabel = dialogView.findViewById<TextView>(R.id.tvSubtitleLabel)
+        
+        // Image Picker Logic
+        val ivEditImage = dialogView.findViewById<ImageView>(R.id.ivEditImage)
+        val btnChangeImage = dialogView.findViewById<View>(R.id.btnChangeImage)
+        var selectedImageRes = imageRes
+
+        if (selectedImageRes != 0) ivEditImage.setImageResource(selectedImageRes)
+        
+        btnChangeImage.setOnClickListener {
+            showImagePickerDialog(selectedImageRes) { newImg ->
+                selectedImageRes = newImg
+                ivEditImage.setImageResource(newImg)
+            }
+        }
         
         // Set label berdasarkan type
         if (itemType == "ANIMALS") {
@@ -106,6 +154,8 @@ class DetailActivity : AppCompatActivity() {
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
             .create()
+            
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dialogView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
             dialog.dismiss()
@@ -122,13 +172,13 @@ class DetailActivity : AppCompatActivity() {
             }
 
             // Update ke database
-            val success = if (itemType == "ANIMALS") {
-                dbHelper.updateAnimal(itemId, newName, newSubtitle, newDesc)
+            val result = if (itemType == "ANIMALS") {
+                dbHelper.updateAnimal(itemId, newName, newSubtitle, newDesc, selectedImageRes)
             } else {
-                dbHelper.updateFruit(itemId, newName, newSubtitle, newDesc)
+                dbHelper.updateFruit(itemId, newName, newSubtitle, newDesc, selectedImageRes)
             }
 
-            if (success) {
+            if (result > 0) {
                 // Update tampilan
                 currentName = newName
                 currentSubtitleValue = newSubtitle
@@ -140,7 +190,9 @@ class DetailActivity : AppCompatActivity() {
                     "Warna: $newSubtitle"
                 }
                 
-                updateUI(newName, displaySubtitle, newDesc, imageRes)
+                updateUI(newName, displaySubtitle, newDesc, selectedImageRes)
+                imageRes = selectedImageRes // Persist changes
+                
                 Toast.makeText(this, getString(R.string.toast_saved), Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             } else {

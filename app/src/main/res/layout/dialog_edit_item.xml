@@ -11,20 +11,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dialog_edit_title"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/kid_primary_dark"
+        android:textColor="@color/kid_primary"
         android:gravity="center"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="16dp"/>
 
-    <!-- Field Nama -->
-    <TextView
+    <!-- Image Selection Section -->
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="📝 Nama"
-        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/ivEditImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_edittext"
+            android:padding="4dp"
+            android:src="@drawable/logoecokids"
+            android:scaleType="fitCenter"/>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_edit"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/bg_fab"
+            android:padding="6dp"
+            android:elevation="4dp"/>
+            
+        <!-- Invisible click area -->
+         <View
+            android:id="@+id/btnChangeImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvLabelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_name"
         android:textStyle="bold"
         android:textColor="@color/black"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawablePadding="8dp"
         android:layout_marginBottom="4dp"/>
 
     <EditText

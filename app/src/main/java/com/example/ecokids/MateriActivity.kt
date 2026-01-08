@@ -98,6 +98,41 @@ class MateriActivity : AppCompatActivity() {
         }
     }
 
+    private val availableImages = listOf(
+        R.drawable.img_kucing, R.drawable.img_anjing, R.drawable.img_sapi, R.drawable.img_kambing,
+        R.drawable.img_ayam, R.drawable.img_ikan, R.drawable.img_burung, R.drawable.img_kelinci,
+        R.drawable.img_singa, R.drawable.img_gajah,
+        R.drawable.img_apel, R.drawable.img_pisang, R.drawable.img_jeruk, R.drawable.img_mangga,
+        R.drawable.img_anggur, R.drawable.img_stroberi, R.drawable.img_semangka, R.drawable.img_nanas,
+        R.drawable.img_pepaya, R.drawable.img_alpukat,
+        R.drawable.logoecokids
+    )
+
+    private fun showImagePickerDialog(currentImage: Int, onSelected: (Int) -> Unit) {
+        val dialog = android.app.Dialog(this)
+        dialog.setContentView(R.layout.dialog_image_picker)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        
+        // Adjust width standard
+        dialog.window?.setLayout(
+             (resources.displayMetrics.widthPixels * 0.9).toInt(),
+             android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val rv = dialog.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvImagePicker)
+        rv.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 3)
+        rv.adapter = ImagePickerAdapter(this, availableImages) { selectedResId ->
+            onSelected(selectedResId)
+            dialog.dismiss()
+        }
+        
+        dialog.findViewById<android.view.View>(R.id.btnCancelPicker).setOnClickListener {
+            dialog.dismiss()
+        }
+        
+        dialog.show()
+    }
+
     private fun showAddDialog(type: String) {
         val dialogView = android.view.LayoutInflater.from(this).inflate(R.layout.dialog_edit_item, null)
         val etName = dialogView.findViewById<android.widget.EditText>(R.id.etName)
@@ -108,6 +143,18 @@ class MateriActivity : AppCompatActivity() {
 
         // Check layout file dialog_edit_item.xml if it has title TextView. Usually it does.
         // Assuming dialog_edit_item.xml structure based on previous edits.
+        
+        // Image Picker Logic
+        val ivEditImage = dialogView.findViewById<android.widget.ImageView>(R.id.ivEditImage)
+        val btnChangeImage = dialogView.findViewById<android.view.View>(R.id.btnChangeImage)
+        var selectedImageResId = R.drawable.logoecokids // Default
+        
+        btnChangeImage.setOnClickListener {
+            showImagePickerDialog(selectedImageResId) { newImageId ->
+                selectedImageResId = newImageId
+                ivEditImage.setImageResource(newImageId)
+            }
+        }
         
         // Adjust UI
         dialogView.findViewById<android.widget.Button>(R.id.btnSave).text = "Tambah"
@@ -123,6 +170,9 @@ class MateriActivity : AppCompatActivity() {
         val dialog = android.app.AlertDialog.Builder(this)
             .setView(dialogView)
             .create()
+            
+        // Transparent background for dialog rounded corners
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dialogView.findViewById<android.widget.Button>(R.id.btnCancel).setOnClickListener {
             dialog.dismiss()
@@ -140,9 +190,9 @@ class MateriActivity : AppCompatActivity() {
 
             var result: Long = -1
             if (type == "ANIMALS") {
-                result = dbHelper.addAnimal(name, subtitle, desc)
+                result = dbHelper.addAnimal(name, subtitle, desc, selectedImageResId)
             } else {
-                result = dbHelper.addFruit(name, subtitle, desc)
+                result = dbHelper.addFruit(name, subtitle, desc, selectedImageResId)
             }
 
             if (result > -1) {
