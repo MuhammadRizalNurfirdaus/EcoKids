@@ -51,6 +51,18 @@ class QuizActivity : AppCompatActivity() {
             showExitConfirmation()
         }
 
+        // Parent Mode: Manage Quiz Button
+        val btnManage = findViewById<android.widget.ImageButton>(R.id.btnManage)
+        val prefs = getSharedPreferences("EcoKidsPrefs", MODE_PRIVATE)
+        if (prefs.getBoolean("PARENT_MODE_ACTIVE", false)) {
+            btnManage.visibility = android.view.View.VISIBLE
+            btnManage.setOnClickListener {
+                startActivity(android.content.Intent(this, ManageQuizActivity::class.java))
+            }
+        } else {
+            btnManage.visibility = android.view.View.GONE
+        }
+
         loadLevel(currentLevel)
 
         btnOptionA.setOnClickListener { checkAnswer(0) }

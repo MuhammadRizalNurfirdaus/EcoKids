@@ -19,11 +19,9 @@
     <string name="btn_delete">Hapus 🗑️</string>
     <string name="dialog_edit_title">Ubah Data 📝</string>
     <string name="dialog_delete_title">Yakin Hapus? 🤔</string>
-    <string name="dialog_delete_message">Kamu yakin ingin menghapus ini?</string>
-    <string name="btn_save">Simpan ✓</string>
-    <string name="btn_cancel">Batal</string>
-    <string name="btn_yes_delete">Ya, Hapus</string>
-    <string name="btn_no">Tidak</string>
+    <string name="msg_confirm_delete">Kamu yakin ingin menghapus?</string>
+    <string name="btn_yes_delete">Ya, hapus</string>
+    <string name="btn_no_cancel">Tidak, batal</string>
     <string name="toast_saved">Berhasil disimpan! 🎉</string>
     <string name="toast_deleted">Berhasil dihapus! 👋</string>
     <string name="hint_name">Nama</string>

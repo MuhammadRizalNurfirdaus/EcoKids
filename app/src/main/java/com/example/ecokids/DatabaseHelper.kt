@@ -374,6 +374,45 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return result > 0
     }
 
+    fun updateQuiz(q: QuizQuestion): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_QUESTION, q.question)
+        values.put(COL_OPT_A, q.optionA)
+        values.put(COL_OPT_B, q.optionB)
+        values.put(COL_OPT_C, q.optionC)
+        values.put(COL_OPT_D, q.optionD)
+        values.put(COL_ANSWER, q.correctAnswer)
+        values.put(COL_LEVEL, q.level)
+        values.put(COL_IMAGE, q.imageResId)
+        val result = db.update(TABLE_QUIZ, values, "$COL_ID = ?", arrayOf(q.id.toString()))
+        return result > 0
+    }
+
+    fun getAllManualQuizzes(): List<QuizQuestion> {
+        val quizList = ArrayList<QuizQuestion>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_QUIZ ORDER BY $COL_LEVEL, $COL_ID DESC", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val q = QuizQuestion(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_QUESTION)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_A)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_B)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_C)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_D)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_ANSWER)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_LEVEL)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_IMAGE))
+                )
+                quizList.add(q)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return quizList
+    }
+
     // ================= DELETE FUNCTIONS =================
     
     fun deleteAnimal(id: Int): Boolean {
