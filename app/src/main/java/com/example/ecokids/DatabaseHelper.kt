@@ -314,39 +314,36 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
             // Generate Animal Questions
             for (a in animals) {
-                val q = createGuessNameQuestion(a.name, a.imageResId, allNames)
+                val correctName = a.name
+                val distractors = allNames.filter { it != correctName }.shuffled().take(3)
+                val options = (distractors + correctName).shuffled()
+                val correctIndex = options.indexOf(correctName)
+                
+                val q = QuizQuestion(
+                    -1, "Apakah nama gambar ini?", 
+                    options[0], options[1], options[2], options[3], 
+                    correctIndex, "A", a.imageResId
+                )
                 quizList.add(q)
             }
 
             // Generate Fruit Questions
             for (f in fruits) {
-                val q = createGuessNameQuestion(f.name, f.imageResId, allNames)
+                val correctName = f.name
+                val distractors = allNames.filter { it != correctName }.shuffled().take(3)
+                val options = (distractors + correctName).shuffled()
+                val correctIndex = options.indexOf(correctName)
+                
+                val q = QuizQuestion(
+                    -1, "Apakah nama gambar ini?", 
+                    options[0], options[1], options[2], options[3], 
+                    correctIndex, "A", f.imageResId
+                )
                 quizList.add(q)
             }
         }
 
         return quizList.shuffled().take(10) // Ambil max 10 soal acak
-    }
-
-    fun createGuessNameQuestion(correctName: String, imageRes: Int, allNames: List<String>): QuizQuestion {
-        // Ambil 3 jawaban salah secara acak
-        val distractors = allNames.filter { it != correctName }.shuffled().take(3)
-        
-        // Gabung dan acak posisi
-        val options = (distractors + correctName).shuffled()
-        val correctIndex = options.indexOf(correctName)
-        
-        return QuizQuestion(
-            id = -1, // ID negatif penanda dynamic
-            question = "Apakah nama gambar ini?",
-            optionA = options[0],
-            optionB = options[1],
-            optionC = options[2],
-            optionD = options[3],
-            correctAnswer = correctIndex,
-            level = "A", // Default level dynamic
-            imageResId = imageRes
-        )
     }
 
     // CRUD Manual Quiz
