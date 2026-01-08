@@ -216,13 +216,13 @@ class DetailActivity : AppCompatActivity() {
 
         dialogView.findViewById<Button>(R.id.btnYesDelete).setOnClickListener {
             // Hapus dari database
-            val success = if (itemType == "ANIMALS") {
+            val result = if (itemType == "ANIMALS") {
                 dbHelper.deleteAnimal(itemId)
             } else {
                 dbHelper.deleteFruit(itemId)
             }
 
-            if (success) {
+            if (result > 0) {
                 Toast.makeText(this, getString(R.string.toast_deleted), Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
                 // Kembali ke halaman sebelumnya

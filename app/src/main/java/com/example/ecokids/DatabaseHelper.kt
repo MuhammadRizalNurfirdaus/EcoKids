@@ -416,19 +416,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return quizList
     }
 
-    // ================= DELETE FUNCTIONS =================
-    
-    fun deleteAnimal(id: Int): Boolean {
-        val db = this.writableDatabase
-        val result = db.delete(TABLE_ANIMALS, "$COL_ID = ?", arrayOf(id.toString()))
-        return result > 0
-    }
 
-    fun deleteFruit(id: Int): Boolean {
-        val db = this.writableDatabase
-        val result = db.delete(TABLE_FRUITS, "$COL_ID = ?", arrayOf(id.toString()))
-        return result > 0
-    }
 
     // ================= USER FUNCTIONS =================
 
