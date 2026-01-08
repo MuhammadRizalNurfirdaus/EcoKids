@@ -310,7 +310,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return quizList.shuffled().take(10) // Ambil max 10 soal acak
     }
 
-    private fun createDynamicQuizzes(): List<QuizQuestion> {
+    fun createDynamicQuizzes(): List<QuizQuestion> {
         val list = ArrayList<QuizQuestion>()
         // Pastikan methods ini ada
         val animals = getAllAnimals()
@@ -336,7 +336,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return list
     }
 
-    private fun createGuessNameQuestion(correctName: String, imageRes: Int, allNames: List<String>): QuizQuestion {
+    fun createGuessNameQuestion(correctName: String, imageRes: Int, allNames: List<String>): QuizQuestion {
         // Ambil 3 jawaban salah secara acak
         val distractors = allNames.filter { it != correctName }.shuffled().take(3)
         
