@@ -231,48 +231,146 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return list
     }
 
-    fun getQuizzesByLevel(level: String): List<QuizQuestion> {
-        val list = ArrayList<QuizQuestion>()
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_QUIZ WHERE $COL_LEVEL = ? ORDER BY RANDOM()", arrayOf(level))
-        if (cursor.moveToFirst()) {
-            do {
-                list.add(QuizQuestion(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5),
-                    cursor.getInt(6),
-                    cursor.getString(7),
-                    cursor.getInt(8)
-                ))
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return list
-    }
-
-    // ================= UPDATE FUNCTIONS =================
-    
-    fun updateAnimal(id: Int, name: String, habitat: String, description: String): Boolean {
+    fun addAnimal(name: String, habitat: String, desc: String): Long {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAME, name)
         values.put(COL_HABITAT, habitat)
-        values.put(COL_DESC, description)
-        val result = db.update(TABLE_ANIMALS, values, "$COL_ID = ?", arrayOf(id.toString()))
-        return result > 0
+        values.put(COL_DESC, desc)
+        values.put(COL_IMAGE, R.drawable.logoecokids) // Default image for user added items
+        return db.insert(TABLE_ANIMALS, null, values)
     }
 
-    fun updateFruit(id: Int, name: String, color: String, description: String): Boolean {
+    fun addFruit(name: String, color: String, desc: String): Long {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COL_NAME, name)
         values.put(COL_COLOR, color)
-        values.put(COL_DESC, description)
+        values.put(COL_DESC, desc)
+        values.put(COL_IMAGE, R.drawable.logoecokids)
+        return db.insert(TABLE_FRUITS, null, values)
+    }
+
+    fun updateAnimal(id: Int, name: String, habitat: String, desc: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_NAME, name)
+        values.put(COL_HABITAT, habitat)
+        values.put(COL_DESC, desc)
+        val result = db.update(TABLE_ANIMALS, values, "$COL_ID = ?", arrayOf(id.toString()))
+        return result > 0
+    }
+
+    fun updateFruit(id: Int, name: String, color: String, desc: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_NAME, name)
+        values.put(COL_COLOR, color)
+        values.put(COL_DESC, desc)
         val result = db.update(TABLE_FRUITS, values, "$COL_ID = ?", arrayOf(id.toString()))
+        return result > 0
+    }
+
+    // ================= QUIZ LOGIC (DYNAMIC + MANUAL) =================
+
+    fun getQuizzesByLevel(level: String): List<QuizQuestion> {
+        val quizList = ArrayList<QuizQuestion>()
+        
+        // 1. Ambil Manual Quiz dari Database
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_QUIZ WHERE $COL_LEVEL = ?", arrayOf(level))
+        if (cursor.moveToFirst()) {
+            do {
+                val q = QuizQuestion(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_QUESTION)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_A)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_B)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_C)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_OPT_D)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_ANSWER)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COL_LEVEL)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COL_IMAGE))
+                )
+                quizList.add(q)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+
+        // 2. Generate Dynamic Quiz dari Materi (Hanya level A & B)
+        // Level A: Tebak Nama Hewan/Buah dari Gambar
+        if (level == "A" || level == "B") {
+            val generatedQuizzes = generateDynamicQuizzes()
+            quizList.addAll(generatedQuizzes)
+        }
+
+        return quizList.shuffled().take(10) // Ambil max 10 soal acak
+    }
+
+    private fun generateDynamicQuizzes(): List<QuizQuestion> {
+        val list = ArrayList<QuizQuestion>()
+        val animals = getAllAnimals()
+        val fruits = getAllFruits()
+        
+        // Combine names for distractors
+        val allNames = ArrayList<String>()
+        animals.forEach { allNames.add(it.name) }
+        fruits.forEach { allNames.add(it.name) }
+
+        // Generate Animal Questions
+        for (a in animals) {
+            val q = createGuessNameQuestion(a.name, a.imageResId, allNames)
+            list.add(q)
+        }
+
+        // Generate Fruit Questions
+        for (f in fruits) {
+            val q = createGuessNameQuestion(f.name, f.imageResId, allNames)
+            list.add(q)
+        }
+        
+        return list
+    }
+
+    private fun createGuessNameQuestion(correctName: String, imageRes: Int, allNames: List<String>): QuizQuestion {
+        // Ambil 3 jawaban salah secara acak
+        val distractors = allNames.filter { it != correctName }.shuffled().take(3)
+        
+        // Gabung dan acak posisi
+        val options = (distractors + correctName).shuffled()
+        val correctIndex = options.indexOf(correctName)
+        
+        return QuizQuestion(
+            id = -1, // ID negatif penanda dynamic
+            question = "Apakah nama gambar ini?",
+            optionA = options[0],
+            optionB = options[1],
+            optionC = options[2],
+            optionD = options[3],
+            correctAnswer = correctIndex,
+            level = "A", // Default level dynamic
+            imageResId = imageRes
+        )
+    }
+
+    // CRUD Manual Quiz
+    fun addQuiz(q: QuizQuestion): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COL_QUESTION, q.question)
+        values.put(COL_OPT_A, q.optionA)
+        values.put(COL_OPT_B, q.optionB)
+        values.put(COL_OPT_C, q.optionC)
+        values.put(COL_OPT_D, q.optionD)
+        values.put(COL_ANSWER, q.correctAnswer)
+        values.put(COL_LEVEL, q.level)
+        values.put(COL_IMAGE, q.imageResId)
+        return db.insert(TABLE_QUIZ, null, values)
+    }
+
+    fun deleteQuiz(id: Int): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_QUIZ, "$COL_ID = ?", arrayOf(id.toString()))
         return result > 0
     }
 

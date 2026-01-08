@@ -36,17 +36,9 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        // Check prefs again in case changed in Settings
         val prefs = getSharedPreferences("EcoKidsPrefs", MODE_PRIVATE)
-        val isEnabled = prefs.getBoolean("SOUND_ENABLED", true)
-        MusicManager.isMusicEnabled = isEnabled
-        if (isEnabled) {
+        if (prefs.getBoolean("SOUND_ENABLED", true)) {
             MusicManager.playMusic(this)
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        MusicManager.pauseMusic()
     }
 }

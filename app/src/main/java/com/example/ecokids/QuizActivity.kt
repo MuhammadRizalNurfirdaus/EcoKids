@@ -31,6 +31,9 @@ class QuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
+        
+        // Stop background music for concentration
+        MusicManager.pauseMusic()
 
         dbHelper = DatabaseHelper(this)
         tvQuestion = findViewById(R.id.tvQuestion)
@@ -261,9 +264,23 @@ class QuizActivity : AppCompatActivity() {
         showExitConfirmation()
     }
 
+        if (q.imageResId != 0) {
+            ivQuestion.setImageResource(q.imageResId)
+            ivQuestion.visibility = android.view.View.VISIBLE
+        } else {
+            ivQuestion.visibility = android.view.View.GONE
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         quizTimer?.cancel()
+        
+        // Resume main BGM when exiting quiz
+        val prefs = getSharedPreferences("EcoKidsPrefs", MODE_PRIVATE)
+        if (prefs.getBoolean("SOUND_ENABLED", true)) {
+            MusicManager.playMusic(this)
+        }
     }
 
     override fun finish() {
