@@ -276,6 +276,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         values.put(COL_IMAGE, imageResId)
         return db.update(TABLE_FRUITS, values, "$COL_ID=?", arrayOf(id.toString()))
     }
+
+    fun deleteFruit(id: Int): Int {
+        val db = this.writableDatabase
+        return db.delete(TABLE_FRUITS, "$COL_ID=?", arrayOf(id.toString()))
+    }
     // ================= QUIZ LOGIC (DYNAMIC + MANUAL) =================
 
     fun getQuizzesByLevel(level: String): List<QuizQuestion> {
