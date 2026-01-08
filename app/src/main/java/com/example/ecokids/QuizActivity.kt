@@ -264,13 +264,8 @@ class QuizActivity : AppCompatActivity() {
         showExitConfirmation()
     }
 
-        if (q.imageResId != 0) {
-            ivQuestion.setImageResource(q.imageResId)
-            ivQuestion.visibility = android.view.View.VISIBLE
-        } else {
-            ivQuestion.visibility = android.view.View.GONE
-        }
-    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
