@@ -350,7 +350,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             }
         }
 
-        return quizList.shuffled().take(10) // Ambil max 10 soal acak
+        return quizList.shuffled().take(5) // Ambil max 5 soal acak
     }
 
     // CRUD Manual Quiz
