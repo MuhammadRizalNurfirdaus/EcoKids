@@ -72,12 +72,58 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun updateUI(name: String, subtitle: String, desc: String, imageResId: Int) {
-        findViewById<TextView>(R.id.tvDetailName).text = name
-        findViewById<TextView>(R.id.tvDetailHabitat).text = subtitle
-        findViewById<TextView>(R.id.tvDetailDesc).text = desc
+        val tvName = findViewById<TextView>(R.id.tvDetailName)
+        val tvSubtitle = findViewById<TextView>(R.id.tvDetailHabitat)
+        val tvDesc = findViewById<TextView>(R.id.tvDetailDesc)
+
+        tvName.text = name
+        tvSubtitle.text = subtitle
+        tvDesc.text = desc
         
+        // --- VISIBILITY & COLOR LOGIC ---
+        // Force Name to Black for visibility
+        tvName.setTextColor(android.graphics.Color.BLACK)
+        
+        if (itemType == "ANIMALS") {
+            // Animals: Name & Habitat Black and Bold
+            tvName.typeface = android.graphics.Typeface.DEFAULT_BOLD
+            tvSubtitle.setTextColor(android.graphics.Color.BLACK)
+            tvSubtitle.typeface = android.graphics.Typeface.DEFAULT_BOLD
+        } else {
+            // Fruits: Name Black (Normal/Bold), Subtitle matches Fruit Color
+            tvName.typeface = android.graphics.Typeface.DEFAULT_BOLD
+            
+            // Extract color word (assuming subtitle format "Warna: [Color]")
+            // We use currentSubtitleValue (raw value e.g. "Merah")
+            val colorVal = currentSubtitleValue.trim()
+            val colorCode = getColorFromString(colorVal)
+            
+            tvSubtitle.setTextColor(colorCode)
+            // Make it bold too for better readability
+            tvSubtitle.typeface = android.graphics.Typeface.DEFAULT_BOLD
+        }
+
         if (imageResId != 0) {
             findViewById<ImageView>(R.id.imgDetail).setImageResource(imageResId)
+        }
+    }
+
+    private fun getColorFromString(colorName: String): Int {
+        return when (colorName.lowercase()) {
+            "merah", "red" -> android.graphics.Color.RED
+            "kuning", "yellow" -> android.graphics.Color.parseColor("#FFD700") // Gold/Yellow
+            "hijau", "green" -> android.graphics.Color.parseColor("#006400") // Dark Green for visibility on green bg? 
+            // Wait, bg is green. Dark Green text might be hard. Let's use darker green or keep it consistent.
+            // Request: "sesuaikan dengan warna buah". 
+            // If bg is light green, dark green text is OK.
+            
+            "ungu", "purple" -> android.graphics.Color.parseColor("#800080")
+            "oranye", "orange", "jingga" -> android.graphics.Color.parseColor("#FF4500") // OrangeRed
+            "biru", "blue" -> android.graphics.Color.BLUE
+            "hitam", "black" -> android.graphics.Color.BLACK
+            "putih", "white" -> android.graphics.Color.WHITE // Might be invisible on light bg
+            "cokelat", "brown" -> android.graphics.Color.parseColor("#8B4513")
+            else -> android.graphics.Color.BLACK // Default
         }
     }
 
