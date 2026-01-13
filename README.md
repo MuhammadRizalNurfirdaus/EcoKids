@@ -45,7 +45,12 @@ Aplikasi edukasi Android untuk anak-anak belajar mengenal **hewan** dan **buah-b
 
 ### 🎵 Musik & Audio
 - **Seamless Backsound**: Musik latar berjalan tanpa henti antar menu
-- **Smart Pause**: Otomatis senyap saat fokus mengerjakan Kuis
+- **Smart Pause**: Otomatis senyap saat fokus mengerjakan Kuis (kembali berjalan saat slide/keluar)
+- **Robust**: Menggunakan timer 3 detik untuk menangani lag pada transisi (khusus emulator lambat)
+
+### 🎨 Tampilan (UI)
+- **Responsif**: Layout aman untuk berbagai ukuran layar (ScrollView)
+- **Child-Friendly**: Teks **Hitam Tebal** untuk kemudahan membaca, warna dinamis (teks "Merah" berwarna Merah)
 
 ### ⚙️ Pengaturan
 - **Mode Guru/Orang Tua** dengan sistem Login & Register
@@ -77,69 +82,37 @@ Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-ana
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Build System
 
-| Komponen | Teknologi |
-|----------|-----------|
-| Bahasa | Kotlin |
-| UI | Android XML Layouts (Responsive) |
-| Database | SQLite (SQLiteOpenHelper) |
-| Architecture | Single Activity Pattern + BaseActivity |
-| Min SDK | 24 (Android 7.0) |
-
----
-
-## 📋 Kriteria Penilaian - Fungsionalitas (30%)
-
-| No | Indikator Penilaian | Status |
-|:--:|---------------------|:------:|
-| B1 | Aplikasi dibuat dengan Kotlin | ✅ |
-| B2 | Minimal 2 Activity digunakan | ✅ (8 Activity) |
-| B3 | Intent Explicit berjalan | ✅ |
-| B4 | RecyclerView tampil dengan benar | ✅ |
-| B5 | RecyclerView terhubung dengan Adapter | ✅ |
-| B6 | Create data (Insert SQLite) | ✅ |
-| B7 | Read data (Tampil di RecyclerView) | ✅ |
-| B8 | Update data | ✅ |
-| B9 | Delete data | ✅ |
-| B10 | Tidak ada crash saat dijalankan | ✅ |
+| Komponen | Teknologi/Versi |
+|----------|-----------------|
+| **Bahasa** | **Kotlin** 1.9.0 |
+| **Build System** | **Gradle** 8.0 (Android Gradle Plugin) |
+| **UI** | Android XML Layouts (Responsive + ScrollView) |
+| **Database** | SQLite (SQLiteOpenHelper) |
+| **Architecture** | Single Activity Pattern + BaseActivity |
+| **Min SDK** | 24 (Android 7.0 - Nougat) |
+| **Target SDK** | 33 (Android 13 - Tiramisu) |
 
 ---
 
-## 📂 Struktur Project
+## 📱 File APK
 
-```
-app/src/main/
-├── java/com/example/ecokids/
-│   ├── MainActivity.kt           # Halaman utama
-│   ├── BaseActivity.kt           # Base Class (Music Lifecycle)
-│   ├── SplashActivity.kt         # Splash screen
-│   ├── MateriActivity.kt         # Daftar materi (RecyclerView)
-│   ├── DetailActivity.kt         # Detail materi + Edit/Delete
-│   ├── QuizActivity.kt           # Quiz interaktif (Player)
-│   ├── ManageQuizActivity.kt     # Kelola Kuis Manual (Admin)
-│   ├── SettingsActivity.kt       # Pengaturan + Logic Login/Register
-│   ├── DatabaseHelper.kt         # SQLite CRUD operations (+ User Table)
-│   ├── MateriAdapter.kt          # RecyclerView Adapter
-│   ├── QuizManageAdapter.kt      # Adapter List Kuis
-│   ├── ImagePickerAdapter.kt     # Adapter Pilihan Gambar
-│   ├── Models.kt                 # Data classes (Animal, Fruit, Quiz, User)
-│   └── MusicManager.kt           # Background music manager
-│
-└── res/
-    ├── layout/                   # XML layouts (Activities & Dialogs)
-    ├── drawable/                 # Icons, backgrounds
-    └── values/                   # Colors, strings
-```
+Aplikasi yang sudah di-build dapat ditemukan di direktori berikut:
+`app/build/outputs/apk/debug/app-debug.apk`
+
+Atau lokasi absolut di mesin development:
+`/home/rizal/MyProject/Aplikasi/EcoKids/app/build/outputs/apk/debug/app-debug.apk`
 
 ---
 
 ## 🚀 Cara Menjalankan
 
 1. Clone repository ini
-2. Buka dengan Android Studio
-3. Sync Gradle
-4. Run pada emulator atau device Android
+2. Buka dengan **Android Studio Giraffe** atau lebih baru
+3. Tunggu proses **Sync Gradle** selesai (download dependencies)
+4. Pastikan SDK Android minimal versi 24 sudah terinstall
+5. Run pada emulator atau device Android (Disarankan Mode Portrait)
 
 ---
 
