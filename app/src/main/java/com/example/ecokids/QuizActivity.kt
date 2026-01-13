@@ -282,12 +282,8 @@ class QuizActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         quizTimer?.cancel()
-        
-        // Resume main BGM when exiting quiz
-        val prefs = getSharedPreferences("EcoKidsPrefs", MODE_PRIVATE)
-        if (prefs.getBoolean("SOUND_ENABLED", true)) {
-            MusicManager.playMusic(this)
-        }
+        // No explicit playMusic here. The Activity we go back to (e.g. MainActivity or next Level)
+        // will handle playMusic in its onResume via BaseActivity.
     }
 
     override fun finish() {

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,13 +32,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnSettings).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
-    }
-    override fun onResume() {
-        super.onResume()
-        val prefs = getSharedPreferences("EcoKidsPrefs", MODE_PRIVATE)
-        if (prefs.getBoolean("SOUND_ENABLED", true)) {
-            MusicManager.playMusic(this)
         }
     }
 }

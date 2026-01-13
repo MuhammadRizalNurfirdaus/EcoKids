@@ -6,55 +6,66 @@ import android.media.MediaPlayer
 object MusicManager {
     private var mediaPlayer: MediaPlayer? = null
     var isMusicEnabled = true
+    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+    private val pauseRunnable = Runnable { pauseMusic() }
 
     fun playMusic(context: Context) {
+        // Cancel any scheduled pause since we are resuming/playing
+        handler.removeCallbacks(pauseRunnable)
+
         if (!isMusicEnabled) return
-        
+
         if (mediaPlayer == null) {
             try {
-                // Ensure R.raw.bgm_ecokids exists.
                 mediaPlayer = MediaPlayer.create(context, R.raw.bgm_ecokids)
                 
                 if (mediaPlayer == null) {
-                    android.widget.Toast.makeText(context, "Gagal memuat lagu (null)", android.widget.Toast.LENGTH_SHORT).show()
                     return
                 }
 
-                // Ensure it uses the music stream for volume control
-                val audioAttributes = android.media.AudioAttributes.Builder()
-                    .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
-                    .setContentType(android.media.AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build()
-                mediaPlayer?.setAudioAttributes(audioAttributes)
+                // setAudioAttributes called AFTER create() causes "State 8" error because it's already PREPARED.
+                // We skip it as create() defaults to MUSIC stream which is what we want.
                 
-                // Set volume to max relative to system volume
-                mediaPlayer?.setVolume(1.0f, 1.0f)
+                mediaPlayer?.setVolume(0.5f, 0.5f) // Slightly lower volume for BGM
                 mediaPlayer?.isLooping = true
             } catch (e: Exception) {
                 e.printStackTrace()
-                android.widget.Toast.makeText(context, "Error init: ${e.message}", android.widget.Toast.LENGTH_SHORT).show()
             }
         }
 
-        if (mediaPlayer?.isPlaying == false) {
-            try {
+        try {
+            if (mediaPlayer?.isPlaying == false) {
                 mediaPlayer?.start()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                android.widget.Toast.makeText(context, "Gagal memutar: ${e.message}", android.widget.Toast.LENGTH_SHORT).show()
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     fun pauseMusic() {
-        if (mediaPlayer?.isPlaying == true) {
-            mediaPlayer?.pause()
+        try {
+            if (mediaPlayer?.isPlaying == true) {
+                mediaPlayer?.pause()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
+    fun schedulePause() {
+        // Delay pause to allow Activity transition without stopping music
+        handler.removeCallbacks(pauseRunnable)
+        handler.postDelayed(pauseRunnable, 1000) // 1 second delay
+    }
+
     fun stopMusic() {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
+        handler.removeCallbacks(pauseRunnable)
+        try {
+            mediaPlayer?.stop()
+            mediaPlayer?.release()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         mediaPlayer = null
     }
 }

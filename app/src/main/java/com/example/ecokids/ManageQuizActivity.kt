@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class ManageQuizActivity : AppCompatActivity() {
+class ManageQuizActivity : BaseActivity() {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var recyclerView: RecyclerView

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MateriActivity : AppCompatActivity() {
+class MateriActivity : BaseActivity() {
 
     private lateinit var dbHelper: DatabaseHelper
     private lateinit var recyclerView: RecyclerView
