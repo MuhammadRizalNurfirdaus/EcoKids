@@ -1,155 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvDialogTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dialog_edit_title"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/kid_primary"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Image Selection Section -->
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp">
-
-        <ImageView
-            android:id="@+id/ivEditImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_edittext"
-            android:padding="4dp"
-            android:src="@drawable/logoecokids"
-            android:scaleType="fitCenter"/>
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_edit"
-            android:layout_gravity="bottom|end"
-            android:background="@drawable/bg_fab"
-            android:padding="6dp"
-            android:elevation="4dp"/>
-            
-        <!-- Invisible click area -->
-         <View
-            android:id="@+id/btnChangeImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"/>
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/tvLabelName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hint_name"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:drawableStart="@drawable/ic_edit"
-        android:drawablePadding="8dp"
-        android:layout_marginBottom="4dp"/>
-
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_name"
-        android:inputType="text"
-        android:padding="16dp"
-        android:textSize="18sp"
-        android:background="@drawable/bg_edittext"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Field Habitat/Warna -->
-    <TextView
-        android:id="@+id/tvSubtitleLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🏠 Habitat"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginBottom="4dp"/>
-
-    <EditText
-        android:id="@+id/etSubtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_habitat"
-        android:inputType="text"
-        android:padding="16dp"
-        android:textSize="18sp"
-        android:background="@drawable/bg_edittext"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Field Deskripsi -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="📖 Deskripsi"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginBottom="4dp"/>
-
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_description"
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        android:gravity="top"
-        android:padding="16dp"
-        android:textSize="18sp"
-        android:background="@drawable/bg_edittext"
-        android:layout_marginBottom="24dp"/>
-
-    <!-- Tombol -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:padding="24dp">
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_button"
-            android:text="@string/btn_cancel"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_edit_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/kid_primary"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/bg_button_edit"
-            android:text="@string/btn_save"
-            android:textColor="@android:color/white"
+        <!-- Image Selection Section -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/ivEditImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_edittext"
+                android:padding="4dp"
+                android:src="@drawable/logoecokids"
+                android:scaleType="fitCenter"/>
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_edit"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/bg_fab"
+                android:padding="6dp"
+                android:elevation="4dp"/>
+            
+            <!-- Invisible click area -->
+             <View
+                android:id="@+id/btnChangeImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvLabelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_name"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_edit"
+            android:drawablePadding="8dp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_name"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Field Habitat/Warna -->
+        <TextView
+            android:id="@+id/tvSubtitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🏠 Habitat"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_habitat"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Field Deskripsi -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📖 Deskripsi"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_description"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Tombol -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_button"
+                android:text="@string/btn_cancel"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_button_edit"
+                android:text="@string/btn_save"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
