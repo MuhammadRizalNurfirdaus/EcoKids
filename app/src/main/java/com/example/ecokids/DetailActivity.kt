@@ -103,6 +103,10 @@ class DetailActivity : BaseActivity() {
             tvSubtitle.typeface = android.graphics.Typeface.DEFAULT_BOLD
         }
 
+        // Description always Black and Bold for readability
+        tvDesc.setTextColor(android.graphics.Color.BLACK)
+        tvDesc.typeface = android.graphics.Typeface.DEFAULT_BOLD
+
         if (imageResId != 0) {
             findViewById<ImageView>(R.id.imgDetail).setImageResource(imageResId)
         }
