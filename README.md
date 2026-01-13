@@ -43,9 +43,14 @@ Aplikasi edukasi Android untuk anak-anak belajar mengenal **hewan** dan **buah-b
 - Gambar menarik untuk setiap pertanyaan
 - Feedback langsung dengan emoji menyenangkan
 
+### 🎵 Musik & Audio
+- **Seamless Backsound**: Musik latar berjalan tanpa henti antar menu
+- **Smart Pause**: Otomatis senyap saat fokus mengerjakan Kuis
+
 ### ⚙️ Pengaturan
-- On/Off musik latar
 - **Mode Guru/Orang Tua** dengan sistem Login & Register
+- Manajemen Kuis Manual (Tambah/Edit/Hapus Soal)
+- Kustomisasi Materi (Pilih Ikon Lucu)
 
 ---
 
@@ -59,6 +64,7 @@ Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-ana
 | Quiz | ✅ | ✅ |
 | Edit Materi | ❌ | ✅ |
 | Hapus Materi | ❌ | ✅ |
+| Kelola Kuis | ❌ | ✅ |
 
 ### Alur Aktivasi Mode Guru:
 1. Buka **Pengaturan** ⚙️
@@ -76,10 +82,9 @@ Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-ana
 | Komponen | Teknologi |
 |----------|-----------|
 | Bahasa | Kotlin |
-| UI | Android XML Layouts |
+| UI | Android XML Layouts (Responsive) |
 | Database | SQLite (SQLiteOpenHelper) |
-| Storage | SharedPreferences |
-| Architecture | Single Activity Pattern |
+| Architecture | Single Activity Pattern + BaseActivity |
 | Min SDK | 24 (Android 7.0) |
 
 ---
@@ -89,7 +94,7 @@ Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-ana
 | No | Indikator Penilaian | Status |
 |:--:|---------------------|:------:|
 | B1 | Aplikasi dibuat dengan Kotlin | ✅ |
-| B2 | Minimal 2 Activity digunakan | ✅ (6 Activity) |
+| B2 | Minimal 2 Activity digunakan | ✅ (8 Activity) |
 | B3 | Intent Explicit berjalan | ✅ |
 | B4 | RecyclerView tampil dengan benar | ✅ |
 | B5 | RecyclerView terhubung dengan Adapter | ✅ |
@@ -106,14 +111,18 @@ Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-ana
 ```
 app/src/main/
 ├── java/com/example/ecokids/
-│   ├── MainActivity.kt          # Halaman utama
+│   ├── MainActivity.kt           # Halaman utama
+│   ├── BaseActivity.kt           # Base Class (Music Lifecycle)
 │   ├── SplashActivity.kt         # Splash screen
 │   ├── MateriActivity.kt         # Daftar materi (RecyclerView)
 │   ├── DetailActivity.kt         # Detail materi + Edit/Delete
-│   ├── QuizActivity.kt           # Quiz interaktif
+│   ├── QuizActivity.kt           # Quiz interaktif (Player)
+│   ├── ManageQuizActivity.kt     # Kelola Kuis Manual (Admin)
 │   ├── SettingsActivity.kt       # Pengaturan + Logic Login/Register
 │   ├── DatabaseHelper.kt         # SQLite CRUD operations (+ User Table)
 │   ├── MateriAdapter.kt          # RecyclerView Adapter
+│   ├── QuizManageAdapter.kt      # Adapter List Kuis
+│   ├── ImagePickerAdapter.kt     # Adapter Pilihan Gambar
 │   ├── Models.kt                 # Data classes (Animal, Fruit, Quiz, User)
 │   └── MusicManager.kt           # Background music manager
 │
