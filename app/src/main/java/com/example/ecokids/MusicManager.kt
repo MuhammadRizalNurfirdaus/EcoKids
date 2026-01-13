@@ -54,14 +54,17 @@ object MusicManager {
 
     fun schedulePause() {
         // Delay pause to allow Activity transition without stopping music
+        // Increased delay to 3s because emulator/low-end devices might lag during transition
         handler.removeCallbacks(pauseRunnable)
-        handler.postDelayed(pauseRunnable, 1000) // 1 second delay
+        handler.postDelayed(pauseRunnable, 3000) 
     }
 
     fun stopMusic() {
         handler.removeCallbacks(pauseRunnable)
         try {
-            mediaPlayer?.stop()
+            if (mediaPlayer?.isPlaying == true) {
+                mediaPlayer?.stop()
+            }
             mediaPlayer?.release()
         } catch (e: Exception) {
             e.printStackTrace()
