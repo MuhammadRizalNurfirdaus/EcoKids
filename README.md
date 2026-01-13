@@ -98,11 +98,11 @@ Fitur ini dilindungi dengan sistem autentikasi lengkap untuk memastikan anak-ana
 
 ## 📱 File APK
 
-Aplikasi yang sudah di-build dapat ditemukan di direktori berikut:
-`app/build/outputs/apk/debug/app-debug.apk`
+Aplikasi yang sudah di-build dapat diunduh melalui link berikut:
 
-Atau lokasi absolut di mesin development:
-`/home/rizal/MyProject/Aplikasi/EcoKids/app/build/outputs/apk/debug/app-debug.apk`
+📥 **[Download EcoKids APK](app/build/outputs/apk/debug/app-debug.apk)**
+
+*(Lokasi file: `app/build/outputs/apk/debug/app-debug.apk`)*
 
 ---
 
