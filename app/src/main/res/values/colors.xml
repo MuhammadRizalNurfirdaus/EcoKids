@@ -10,7 +10,7 @@
     
     <!-- Child Friendly Colors -->
     <color name="kid_primary">#4CAF50</color> <!-- Green -->
-    <color name="kid_primary_dark">#388E3C</color>
+    <color name="kid_primary_dark">#0B6B2E</color>
     <color name="kid_accent">#FFEB3B</color> <!-- Yellow -->
     <color name="kid_blue">#2196F3</color>
     <color name="kid_orange">#FF9800</color>

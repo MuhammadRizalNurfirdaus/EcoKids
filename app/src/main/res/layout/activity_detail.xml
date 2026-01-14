@@ -52,7 +52,7 @@
                 android:text="Judul"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                android:textColor="@color/kid_primary_dark"
+                android:textColor="@color/black"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
@@ -62,7 +62,7 @@
                 android:text="Habitat: -"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/kid_blue"
+                android:textColor="@color/black"
                 android:layout_marginBottom="24dp"/>
 
             <TextView
@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="Deskripsi detail ada di sini..."
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
                 android:textColor="@color/black"

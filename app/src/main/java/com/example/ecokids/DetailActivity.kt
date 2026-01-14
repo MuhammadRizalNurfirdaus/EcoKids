@@ -90,14 +90,11 @@ class DetailActivity : BaseActivity() {
             tvSubtitle.setTextColor(android.graphics.Color.BLACK)
             tvSubtitle.typeface = android.graphics.Typeface.DEFAULT_BOLD
         } else {
-            // Fruits: Name Black (already set), Subtitle matches Fruit Color (e.g. Merah -> Red)
-            
-            // Extract color word (assuming subtitle format "Warna: [Color]")
+            // Fruits: match text color with fruit color keyword (e.g., Merah -> Red)
             val colorVal = currentSubtitleValue.trim()
             val colorCode = getColorFromString(colorVal)
-            
+
             tvSubtitle.setTextColor(colorCode)
-            // Make it bold too for better readability
             tvSubtitle.typeface = android.graphics.Typeface.DEFAULT_BOLD
         }
 
@@ -111,21 +108,18 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun getColorFromString(colorName: String): Int {
-        return when (colorName.lowercase()) {
-            "merah", "red" -> android.graphics.Color.RED
-            "kuning", "yellow" -> android.graphics.Color.parseColor("#FFD700") // Gold/Yellow
-            "hijau", "green" -> android.graphics.Color.parseColor("#006400") // Dark Green for visibility on green bg? 
-            // Wait, bg is green. Dark Green text might be hard. Let's use darker green or keep it consistent.
-            // Request: "sesuaikan dengan warna buah". 
-            // If bg is light green, dark green text is OK.
-            
-            "ungu", "purple" -> android.graphics.Color.parseColor("#800080")
-            "oranye", "orange", "jingga" -> android.graphics.Color.parseColor("#FF4500") // OrangeRed
-            "biru", "blue" -> android.graphics.Color.BLUE
-            "hitam", "black" -> android.graphics.Color.BLACK
-            "putih", "white" -> android.graphics.Color.WHITE // Might be invisible on light bg
-            "cokelat", "brown" -> android.graphics.Color.parseColor("#8B4513")
-            else -> android.graphics.Color.BLACK // Default
+        val lower = colorName.lowercase()
+
+        return when {
+            lower.contains("merah") || lower.contains("red") -> android.graphics.Color.RED
+            lower.contains("kuning") || lower.contains("yellow") -> android.graphics.Color.parseColor("#FFD700")
+            lower.contains("hijau") || lower.contains("green") -> android.graphics.Color.parseColor("#0B6B2E")
+            lower.contains("ungu") || lower.contains("purple") -> android.graphics.Color.parseColor("#800080")
+            lower.contains("oranye") || lower.contains("orange") || lower.contains("jingga") -> android.graphics.Color.parseColor("#FF6A00")
+            lower.contains("biru") || lower.contains("blue") -> android.graphics.Color.BLUE
+            lower.contains("cokelat") || lower.contains("brown") -> android.graphics.Color.parseColor("#8B4513")
+            lower.contains("putih") || lower.contains("white") -> android.graphics.Color.WHITE
+            else -> android.graphics.Color.BLACK
         }
     }
 
