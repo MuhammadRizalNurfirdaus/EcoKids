@@ -29,7 +29,6 @@
             android:text="@string/menu_animals"
             android:textSize="20sp"
             android:background="@drawable/bg_button"
-            android:backgroundTint="@color/purple_200"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"
             android:padding="16dp"/>
@@ -41,7 +40,6 @@
             android:text="@string/menu_fruits"
             android:textSize="20sp"
             android:background="@drawable/bg_button"
-            android:backgroundTint="@color/purple_200"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"
             android:padding="16dp"/>
@@ -53,7 +51,6 @@
             android:text="@string/menu_quiz"
             android:textSize="20sp"
             android:background="@drawable/bg_button"
-            android:backgroundTint="@color/purple_200"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"
             android:padding="16dp"/>
@@ -65,7 +62,6 @@
             android:text="@string/menu_settings"
             android:textSize="20sp"
             android:background="@drawable/bg_button"
-            android:backgroundTint="@color/purple_200"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"
             android:padding="16dp"/>
