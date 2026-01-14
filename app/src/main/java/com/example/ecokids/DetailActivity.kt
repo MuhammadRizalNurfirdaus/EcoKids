@@ -81,20 +81,18 @@ class DetailActivity : BaseActivity() {
         tvDesc.text = desc
         
         // --- VISIBILITY & COLOR LOGIC ---
-        // Force Name to Black for visibility
+        // Force Name to Black and Bold for visibility
         tvName.setTextColor(android.graphics.Color.BLACK)
+        tvName.typeface = android.graphics.Typeface.DEFAULT_BOLD
         
         if (itemType == "ANIMALS") {
-            // Animals: Name & Habitat Black and Bold
-            tvName.typeface = android.graphics.Typeface.DEFAULT_BOLD
+            // Animals: Habitat Black and Bold
             tvSubtitle.setTextColor(android.graphics.Color.BLACK)
             tvSubtitle.typeface = android.graphics.Typeface.DEFAULT_BOLD
         } else {
-            // Fruits: Name Black (Normal/Bold), Subtitle matches Fruit Color
-            tvName.typeface = android.graphics.Typeface.DEFAULT_BOLD
+            // Fruits: Name Black (already set), Subtitle matches Fruit Color (e.g. Merah -> Red)
             
             // Extract color word (assuming subtitle format "Warna: [Color]")
-            // We use currentSubtitleValue (raw value e.g. "Merah")
             val colorVal = currentSubtitleValue.trim()
             val colorCode = getColorFromString(colorVal)
             

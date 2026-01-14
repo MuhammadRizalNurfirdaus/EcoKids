@@ -22,7 +22,7 @@
                 android:id="@+id/btnBack"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/bg_fab"
+                android:background="@drawable/bg_circle_green"
                 android:backgroundTint="@null"
                 android:src="@drawable/ic_back"
                 android:contentDescription="Back"
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:text="Pilihan A"
             android:textSize="18sp"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/bg_button_neutral"
             android:backgroundTint="@color/kid_blue"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"/>
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:text="Pilihan B"
             android:textSize="18sp"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/bg_button_neutral"
             android:backgroundTint="@color/kid_orange"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"/>
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="Pilihan C"
             android:textSize="18sp"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/bg_button_neutral"
             android:backgroundTint="@color/kid_primary"
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"/>
