@@ -18,4 +18,5 @@
     <color name="kid_green">#8BC34A</color>
     <color name="kid_red">#FF6B6B</color> <!-- Soft red for delete -->
     <color name="kid_pink">#F48FB1</color> <!-- Soft pink -->
+    <color name="kid_button_purple">#8E24AA</color> <!-- Rich Purple for buttons -->
 </resources>
