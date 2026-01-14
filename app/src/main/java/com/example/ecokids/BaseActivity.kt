@@ -5,6 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 open class BaseActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Force Light Mode to ensure consistent colors across all devices
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
     override fun onResume() {
         super.onResume()
         // Cancel scheduled pause and resume music
