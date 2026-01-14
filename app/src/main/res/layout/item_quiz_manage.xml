@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="Level A"
                 android:background="@drawable/bg_button"
+                android:backgroundTint="@null"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:paddingTop="4dp"

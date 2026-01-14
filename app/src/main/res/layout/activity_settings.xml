@@ -151,7 +151,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mode Guru memungkinkan Anda mengedit atau menghapus materi pembelajaran. PIN default: 1234"
+                android:text="Mode Guru memungkinkan Anda mengedit atau menghapus materi pembelajaran. Silakan login atau daftar terlebih dahulu."
                 android:textSize="14sp"
                 android:textColor="@color/black"/>
 
